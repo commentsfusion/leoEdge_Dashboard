@@ -48,7 +48,7 @@ export const employeeAPI = {
   },
 
    DELETE: async (employee_id) => {
-    const res = await axiosInstance.post(
+    const res = await <axiosInstance className="delete"></axiosInstance>(
       `${ENDPOINTS.ADDEMPLOYEE.GETEMPLYEEBYID}/${employee_id}`
     );
     return res.data;
