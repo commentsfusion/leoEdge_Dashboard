@@ -25,7 +25,7 @@ export const employeeAPI = {
 
   // 🔥 PATCH /add-employee/:employee_id   <-- this is your SAVE
   UPDATEEMPLOYEE: async (employee_id, payload) => {
-    const res = await axiosInstance.patch(
+    const res = await axiosInstance.post(
       `${ENDPOINTS.ADDEMPLOYEE.GETEMPLYEEBYID}/${employee_id}`,
       payload
     );
@@ -35,7 +35,7 @@ export const employeeAPI = {
   // 🔥 PATCH (image upload) /add-employee/:employee_id
   // if your backend accepts image in same route
   UPLOADEMPLOYEEIMAGE: async (employee_id, formData) => {
-    const res = await axiosInstance.patch(
+    const res = await axiosInstance.post(
       `${ENDPOINTS.ADDEMPLOYEE.GETEMPLYEEBYID}/${employee_id}`,
       formData,
       {
@@ -48,7 +48,7 @@ export const employeeAPI = {
   },
 
    DELETE: async (employee_id) => {
-    const res = await axiosInstance.delete(
+    const res = await axiosInstance.post(
       `${ENDPOINTS.ADDEMPLOYEE.GETEMPLYEEBYID}/${employee_id}`
     );
     return res.data;

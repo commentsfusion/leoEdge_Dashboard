@@ -30,6 +30,7 @@ console.log("------------------------------------------------------");
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
+   "https://leo-edge-dashboard.vercel.app",
   // 👇 Add your deployed Firebase Functions v2 base URL
   "https://api-ffyxb55wzq-uc.a.run.app", // <-- replace with your actual one from console
 ];

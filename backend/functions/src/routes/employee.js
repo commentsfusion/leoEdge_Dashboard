@@ -15,7 +15,7 @@ const router = Router();
 router.post("/", upload.single("image"), protect, requireRole("admin"), createEmployee);
 router.get("/",protect, getAllEmployees);
 router.get("/:employee_id",protect, getEmployeeById);
-router.patch("/:employee_id", upload.single("image"), protect, requireRole("admin"), updateEmployeeById);
-router.delete("/:employee_id",upload.single("image"), protect, requireRole("admin"), deleteEmployeeById);
+router.post("/:employee_id", upload.single("image"), protect, requireRole("admin"), updateEmployeeById);
+router.post("/:employee_id",upload.single("image"), protect, requireRole("admin"), deleteEmployeeById);
 
 export default router;  
