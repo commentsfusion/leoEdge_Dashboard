@@ -1,5 +1,5 @@
 "use client";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/sidebar";
 import RequireAuth from "./RequireAuth";
 
 export default function DashboardLayout({ children }) {
