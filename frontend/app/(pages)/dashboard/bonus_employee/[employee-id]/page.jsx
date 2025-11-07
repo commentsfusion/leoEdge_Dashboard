@@ -96,7 +96,7 @@ export default function EmployeeBonusPage() {
     if (activeBonus === "extra_time") {
       if (extraMode === "percentage") {
         const percent = Number(extraPercent);
-        const hours = Number(extraHours);
+        const hours = Number(extraHours); // dropdown gives "1","1.5","2" → Number()
         payload.bonus_percentage = percent;
         payload.extra_hour = hours;
         payload.note = extraNote;
@@ -104,7 +104,6 @@ export default function EmployeeBonusPage() {
         payload.bonus_amount = Number(extraAmount);
         payload.note = extraNote;
       }
-      // 👇 this is the one your backend now expects
       payload.action_date = extraDate;
     }
 
@@ -117,7 +116,6 @@ export default function EmployeeBonusPage() {
         payload.decrement = Number(randomDeductionAmount);
         payload.note = randomDeductionNote;
       }
-      // 👇 pass date as action_date
       payload.action_date = randomDate;
     }
 
@@ -127,7 +125,6 @@ export default function EmployeeBonusPage() {
       setIsSaving(true);
       const res = await salaryAPI.APPLY(payload);
       toast.success(res?.message || "Salary adjustment saved ✅");
-      // optional: reset fields for nicer UX
     } catch (err) {
       const msg =
         err?.response?.data?.message ||
@@ -265,33 +262,39 @@ export default function EmployeeBonusPage() {
 
                   {extraMode === "percentage" ? (
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {/* UPDATED: dropdown for extra hours */}
                       <div>
                         <label className="text-xs font-medium text-gray-700">
                           Extra Hours <span className="text-red-500">*</span>
                         </label>
-                        <input
-                          type="number"
-                          min="0"
+                        <select
                           value={extraHours}
                           onChange={(e) => setExtraHours(e.target.value)}
-                          placeholder="e.g. 4"
-                          className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20"
-                        />
+                          className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20 bg-white"
+                        >
+                          <option value="">Select hours</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1.5</option>
+                          <option value="2">2</option>
+                        </select>
                       </div>
+
                       <div>
                         <label className="text-xs font-medium text-gray-700">
                           Percentage (%) <span className="text-red-500">*</span>
                         </label>
-                        <input
-                          type="number"
-                          min="0"
-                          max="100"
+                        <select
                           value={extraPercent}
                           onChange={(e) => setExtraPercent(e.target.value)}
-                          placeholder="e.g. 15"
                           className="mt-1 w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-900/20"
-                        />
+                        >
+                          <option value="">Select percentage</option>
+                          <option value="1">1</option>
+                          <option value="1.5">1.5</option>
+                          <option value="2">2</option>
+                        </select>
                       </div>
+
                       <div>
                         <label className="text-xs font-medium text-gray-700">
                           Note / Reason <span className="text-red-500">*</span>
@@ -379,10 +382,8 @@ export default function EmployeeBonusPage() {
                 </div>
               </div>
 
-              {/* show rest only if date selected */}
               {randomDate && (
                 <>
-                  {/* mini tabs */}
                   <div className="inline-flex rounded-full bg-gray-100 p-1 text-xs font-medium">
                     <button
                       type="button"
@@ -456,8 +457,7 @@ export default function EmployeeBonusPage() {
                       </div>
                       <div>
                         <label className="text-xs font-medium text-gray-700">
-                          Deduction Note{" "}
-                          <span className="text-red-500">*</span>
+                          Deduction Note <span className="text-red-500">*</span>
                         </label>
                         <textarea
                           value={randomDeductionNote}
