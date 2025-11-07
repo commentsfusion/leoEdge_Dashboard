@@ -65,7 +65,7 @@ const UserProfileCard = ({ loading, error, data }) => {
     }
     try {
       setDeleting(true);
-      const res = await employeeAPI.POST(employeeToDelete.employee_id);
+      const res = await employeeAPI.DELETE(employeeToDelete.employee_id);
       toast.success(res?.message || "Employee deleted successfully.");
       setEmployees((prev) =>
         prev.filter((i) => i.employee_id !== employeeToDelete.employee_id)
